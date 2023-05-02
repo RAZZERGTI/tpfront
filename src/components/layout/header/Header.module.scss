@@ -1,0 +1,135 @@
+.header{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(218,220,224);
+  padding: 0 12px;
+  width: 100%;
+  height: 72px;
+  .logo_wrapper{
+    display: inline-flex;
+    height: 64px;
+    width: 300px;
+    align-items: center;
+    .logo_text{
+      display: inline-block;
+      position: relative;
+      height: 64px;
+      line-height: 64px;
+      padding-left: 20px;
+      a{
+        .logo{
+          background-repeat: no-repeat;
+          background-size: 70px 30px;
+          display: inline-block;
+          height: 30px;
+          margin-right: 5px;
+          padding: 0;
+          position: relative;
+          top: 0;
+          vertical-align: middle;
+          width: 70px;
+          background-image: url('/logo.jpg');
+        }
+      }
+    }
+  }
+  .main_header{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .search_row{
+      display: flex;
+      flex: 0 1 50vw;
+      max-width: 720px;
+      position: relative;
+      transition: background linear .27s,box-shadow linear 0ms .27s;
+      &.active{
+        background: #fff;
+        box-shadow: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+      }
+      .search{
+        background: rgb(241,243,244);
+        border-radius: 8px;
+        display: flex;
+        flex: 0 1 50vw;
+        height: 48px;
+        margin: 12px 0;
+        position: relative;
+        white-space: nowrap;
+        &_image{
+          color: rgb(95,99,104);
+          margin: 12px 16px;
+          vertical-align: top;
+        }
+        &_input{
+          width: 100%;
+          height: 48px;
+          display: inline-block;
+          line-height: 34px;
+          color: #222;
+          &_view{
+            height:100%;
+            display: flex;
+            input{
+              font-family: 'Poppins', sans-serif;
+              color: rgb(60,64,67);
+              font-size: 16px;
+              letter-spacing: .00625em;
+              font-weight: 500;
+              width: 100%;
+              background: none;
+              border: none;
+              outline: none;
+              &::placeholder{
+                font-weight: 600;
+                color: #b0b0b0;
+              }
+            }
+          }
+        }
+      }
+    }
+    .btn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .btn_import{
+        background-color: rgb(182, 58, 58);
+        color: #fff;
+        outline: none;
+        width: 160px;
+        height: 30px;
+        overflow: hidden;
+        position: relative;
+        padding: 5px;
+        text-align: center;
+        border-radius: 4px;
+      .import {
+        span {
+          display: flex;
+          margin-left: 12px;
+          margin-right: 16px;
+          justify-content: center;
+          align-items: center;
+          .import_image {
+            margin-right: 10px;
+          }
+        }
+      }
+      }
+      .btn_question{
+        margin: 8px 0;
+        padding: 12px;
+      }
+      .btn_settings{
+        padding: 12px;
+      }
+      button{
+        border: none;
+        background: none;
+      }
+    }
+  }
+}
