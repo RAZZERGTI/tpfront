@@ -1,0 +1,10 @@
+# Игнорировать папку .next
+.next/
+
+node_modules/
+
+/.next
+/out
+
+*.log
+npm-debug.log*

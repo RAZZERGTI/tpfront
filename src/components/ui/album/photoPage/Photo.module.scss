@@ -1,0 +1,135 @@
+.wrapper_photo{
+  button{
+    border: none;
+    outline: none;
+    background: none;
+  }
+  position: relative;
+  .edit_menu{
+    z-index: 3000;
+    user-select: none;
+    color: #fff;
+    background-color: rgb(32,33,36);
+    bottom: 0;
+    fill: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 360px;
+    .elements{
+      padding: 30px;
+      text-align: center;
+      margin-top: 5px;
+      &:hover{
+        background-color: rgba(95, 99, 104, 0.11);
+      }
+    }
+    .btn_edit_menu{
+      display: flex;
+    }
+    .shapes{
+      padding: 20px;
+      transition: color .1s;
+      flex-grow: 1;
+      border: 0;
+      color: rgba(0,0,0,.54);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 48px;
+      min-width: 4em;
+      outline: none;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      &:hover{
+        background-color: rgba(95, 99, 104, 0.11);
+      }
+    }
+    .settings_effect{
+      padding: 20px;
+      transition: color .1s;
+      flex-grow: 1;
+      border: 0;
+      color: rgba(0,0,0,.54);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 48px;
+      min-width: 4em;
+      outline: none;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      &:hover{
+        background-color: rgba(95, 99, 104, 0.11);
+      }
+    }
+  }
+  .diagonal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    color: rgba(255, 255, 255, 0.25);
+    padding: 10px;
+    font-size: 50px;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    .shape {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: move;
+      border: 1px solid #ccc;
+    }
+
+  }
+  .input_container{
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    .input {
+      position: absolute;
+      border: 1px solid #b1b7ba;
+      color: #b1b7ba;
+      width: 450px;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.53);
+      outline: none;
+      bottom: 20px;
+    }
+    .checkbox_button {
+      position: absolute;
+      right: 10px;
+      bottom: 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      outline: none;
+      img {
+        width: 20px;
+        height: 20px;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+      &:hover img {
+        opacity: 1;
+      }
+    }
+  }
+}
+

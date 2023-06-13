@@ -1,0 +1,68 @@
+.btn_import{
+  background-color: rgb(182, 58, 58);
+  color: #fff;
+  outline: none;
+  width: 140px;
+  height: 37px;
+  overflow: hidden;
+  position: relative;
+  padding: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: 4px;
+  transition: background .3s;
+  &:hover{
+    background-color: rgb(169, 45, 45);
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+  }
+  .import {
+    span {
+      display: flex;
+      margin-left: 12px;
+      margin-right: 16px;
+      justify-content: center;
+      align-items: center;
+      .import_image {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.main {
+  width: 1200px;
+  margin: 40px auto;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 20px;
+}
+
+.upload {
+  div,
+  button {
+    width: 100%;
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  min-height: 600px;
+  background: #fff;
+  border-radius: 15px;
+}
+
+.menu {
+  margin-top: 20px;
+  padding-right: 10px;
+  height: 100%;
+}
+
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+}

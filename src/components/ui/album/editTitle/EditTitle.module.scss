@@ -1,0 +1,100 @@
+.edit_wrapper{
+  display: flex;
+  .edit_image{
+    height: 125px;
+    width: 125px;
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(128,134,139);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+    margin-right: 24px;
+    img{
+      border-radius: 5px;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+  .edit_text{
+    width: 220px;
+    .edit_label{
+      margin-bottom: 10px;
+      label{
+        font-size: 18px;
+      }
+    }
+    .edit_textarea{
+      padding-top: 14px;
+      textarea{
+        font-family: Roboto,Arial,sans-serif;
+        line-height: 1.5rem;
+        font-size: 1rem;
+        letter-spacing: .0125em;
+        font-weight: 600;
+        color: rgb(60,64,67);
+        overflow: hidden;
+        resize: none;
+        width: 250px;
+        height: 24px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid rgb(218,220,224);;
+        display: block;
+        min-height: 24px;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        z-index: 0;
+      }
+    }
+  }
+}
+.btn{
+  position: absolute;
+  display: flex;
+  right: 48px;
+  bottom: 33px;
+  button{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 64px;
+    border: none;
+    outline: none;
+    line-height: inherit;
+    user-select: none;
+    -webkit-appearance: none;
+    overflow: visible;
+    vertical-align: middle;
+    background: transparent;
+    height: 36px;
+    font-size: .875rem;
+    letter-spacing: .0107142857em;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn_cancel{
+    color: rgb(182, 58, 58);
+    padding: 0 8px 0 8px;
+    &:hover{
+      color: rgb(164, 61, 61);
+      background-color: rgba(232, 172, 172, 0.27);
+    }
+  }
+  .btn_done{
+    margin-left: 16px;
+    background-color: rgb(182, 58, 58);
+    color: white;
+    &:hover{
+      box-shadow: 0 1px 2px 0 var(--gm-fillbutton-keyshadow-color,rgba(60,64,67,.3)),0 1px 3px 1px var(--gm-fillbutton-ambientshadow-color,rgba(60,64,67,.15));
+    }
+  }
+}

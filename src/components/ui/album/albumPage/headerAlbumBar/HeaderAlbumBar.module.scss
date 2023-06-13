@@ -1,0 +1,28 @@
+.header_bar{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: white;
+  height: 64px;
+  padding: 0 40px 0 12px;
+  position: fixed;
+  z-index: 200;
+  .previous_btn{
+    width: 48px;
+    height: 48px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 50%;
+    &:hover{
+      background-color: rgba(95, 99, 104, 0.11);
+    }
+  }
+  .btn{
+    display: flex;
+    align-items: center;
+  }
+}

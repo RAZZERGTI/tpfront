@@ -1,0 +1,13 @@
+.album_page{
+  padding: 24px;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  .container{
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}

@@ -1,0 +1,54 @@
+.wrapper_photo{
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 239px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  .btn_like{
+    z-index: 3000;
+    position: absolute;
+    top: 5px;
+    right: 27px;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 50%;
+    height: 44px;
+    width: 44px;
+    &:hover{
+      background-color: rgba(218, 218, 218, 0.51);
+    }
+  }
+  .caption{
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+  }
+  .photos{
+    p{
+      padding: 5px;
+      font-size: 16px;
+    }
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 239px;
+    height: 239px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    transition: all 0.2s ease-in-out;
+    background: rgb(232,234,237);
+    &:hover {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+    img{
+      border-radius: 10px;
+      height: 239px;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+.edit{
+  display: flex;
+  margin-top: 50px;
+  align-items: center;
+  button{
+    width: 24px;
+    height: 24px;
+  border: none;
+  outline: none;
+  background: none;
+}
+  .edit_wrapper{
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    //padding-top: 72px;
+    overflow: auto;
+    .edit_textarea{
+      box-sizing: border-box;
+      flex-grow: 1;
+      margin: 0 auto;
+      max-width: 1440px;
+      padding-top: 72px;
+      min-width: 0;
+      transition: padding-top .27s cubic-bezier(.4,0,.2,1);
+      position: relative;
+      textarea{
+        border: none;
+        border-bottom: 1px solid transparent;
+        bottom: 0;
+        box-sizing: border-box;
+        display: block;
+        font: inherit;
+        height: 100%;
+        margin: 0;
+        outline: none;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        resize: none;
+        top: 0;
+        transition: border-color 0.3s ease;
+        width: 89%;
+        color: rgb(32,33,36);
+        font-family: "Google Sans Display",Roboto,Arial,sans-serif;
+        line-height: 4rem;
+        font-size: 3.5rem;
+        letter-spacing: 0;
+        font-weight: 400;
+        &:hover{
+          border-bottom: 1px solid rgb(218,220,224);
+        }
+        &:focus{
+          border-bottom: 2px solid rgb(182, 58, 58);
+        }
+      }
+    }
+  }
+
+}
