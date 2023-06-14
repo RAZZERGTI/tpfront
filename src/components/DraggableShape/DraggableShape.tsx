@@ -1,5 +1,6 @@
 import React, { useState, MouseEvent, WheelEvent } from 'react';
-import Draggable, { DraggableData } from 'react-draggable';
+import Draggable, { DraggableData, DraggableEvent, DraggableEventHandler } from 'react-draggable';
+
 
 interface Shape {
   id: string;
@@ -23,11 +24,11 @@ const DraggableShape = ({ shape, position, onShapeDrag, color, editMenu }: Dragg
   const [sizeRectangle, setSizeRectangle] = useState<{ width: number; height: number }>({ width: 100, height: 50 });
   const [sizeCircle, setSizeCircle] = useState<{ width: number; height: number }>({ width: 70, height: 70 });
 
-  const handleDrag = (e: MouseEvent, data: DraggableData) => {
-    if (onShapeDrag !== null) {
-      onShapeDrag(shape.id, { x: data.x, y: data.y });
-    }
-  };
+  const handleDrag: DraggableEventHandler = (e: DraggableEvent, data: DraggableData) => {
+  if (onShapeDrag !== null) {
+    onShapeDrag(shape.id, { x: data.x, y: data.y });
+  }
+};
 
   const handleMouseScroll = (e: WheelEvent) => {
     const delta = Math.max(-1, Math.min(1, e.deltaY));
