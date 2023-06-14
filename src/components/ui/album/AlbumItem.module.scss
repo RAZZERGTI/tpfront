@@ -1,7 +1,49 @@
 .album_item{
+  .frame{
+    position: absolute;
+    z-index: 1000;
+  }
   margin-right: 20px;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 239px;
+  height: 239px;
+  margin-bottom: 30px;
+  .album_image{
+    height: 239px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    img{
+      border-radius: 10px;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+  .dropdown_menu {
+    z-index: 3000;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 50%;
+    height: 44px;
+    width: 44px;
+    &:hover{
+      background-color: rgba(218, 218, 218, 0.51);
+    }
+  }
+  .link_to_photo{
+    margin-bottom: 20px;
+    &:hover{
+      color: rgb(182, 58, 58);
+    }
+  }
 }
 .helper{
+  border-radius: 10px;
   font-size: 20px;
   width: 500px;
   margin: 200px auto 0;

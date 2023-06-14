@@ -30,7 +30,7 @@ const DeleteAlbum: FC<IProps> = ({album, active, setModal, handleDelete}) => {
                 <p>Удалить альбом?</p>
             </div>
             <div className={styles.delete_text}>
-                <p>Восстановить удаленный альбом невозможно. Фото и видео из этого альбома, также будут удалены из <span>TaP</span>.</p>
+                <p>Восстановить удаленный альбом невозможно. Фото из этого альбома, также будут удалены из <span>TaP</span>.</p>
             </div>
             <div className={styles.delete_btn}>
                 <button className={styles.non_delete_btn} onClick={() => setModal(false)}>Не удалять</button>

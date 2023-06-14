@@ -1,8 +1,10 @@
 .navigation{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 256px;
   align-content: space-between;
   bottom: 0;
-  display: flex;
   flex-wrap: wrap;
   left: 0;
   overflow-x: hidden;
@@ -11,19 +13,33 @@
   top: 64px;
   z-index: 100;
   padding: 24px 0;
+  .help{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 20px;
+    color: white;
+    border-radius: 20px;
+    &:hover{
+      background-color: rgba(95, 99, 104, 0.19);
+    }
+  }
   .link{
+    margin: 4px 0;
     border-radius: 0 24px 24px 0;
     > a{
       border-radius: 0 24px 24px 0;
       display: flex;
       align-items: center;
-      padding: 8px 12px 8px 24px;
+      padding: 8px 50px 8px 24px;
       .image{
         width: 24px;
         height: 24px;
       }
       &:hover{
-        background: rgb(241,243,244);;
+        background-color: rgba(0, 0, 0, 0.06);
       }
       &.active {
         background: #f1bdbd;

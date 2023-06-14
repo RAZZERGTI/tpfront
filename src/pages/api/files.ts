@@ -90,21 +90,6 @@ export const getAllReport = async() =>{
     console.log(err)
   }
 };
-// export const swapLogo = async (file, idAlbum) => {
-//   try {
-//     const formData = new FormData();
-//     formData.append('fromName', 'uploadPhoto')
-//     formData.append("imageUploads", file);
-//     formData.append('idAlbum', idAlbum)
-//     try {
-//       return await axios.post('http://188.212.124.120:3001/api/swapLogo', formData);
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
 export const uploadPhoto = async(fileUpload, idAlbum : string, idUser: string, caption: string) =>{
   console.log(fileUpload, idAlbum , idUser, caption)
   const formData = new FormData();

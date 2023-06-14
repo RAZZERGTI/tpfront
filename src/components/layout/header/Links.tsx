@@ -8,18 +8,18 @@ interface IProps {
     linkJPG: string
     name: string
     href: string
+    idAlbum?: string
 }
 
 const Links:FC<IProps> = ({ linkJPG, name,href}) => {
     const { pathname } = useRouter()
-
     return (
         <div className={styles.link}>
             <Link href={href} className={
-            pathname === '/' && name === 'Альбомы' ||
-            pathname === '/search' && name === 'Расширенный поиск' ||
-            pathname === '/feel' && name === 'Лента' ||
-            pathname === '/likes' && name === 'Лайки'
+            pathname === '/dashboard' && name === 'Альбомы'  ||
+            pathname === '/dashboard/feed' && name === 'Лента' ||
+            pathname === '/dashboard/likes' && name === 'Лайки' ||
+            pathname === '/admin/reports' && name === 'Обратная связь'
                 ? styles.active : ''}>
                 <div className={styles.image}>
                     <Image src={linkJPG} alt={`${href}-icon`} width={24} height={24} />

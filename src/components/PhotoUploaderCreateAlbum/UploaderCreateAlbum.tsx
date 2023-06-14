@@ -1,5 +1,9 @@
 import React, {PropsWithChildren} from 'react';
 import {DropzoneOptions, useDropzone} from 'react-dropzone';
+import * as Api from "@/pages/api"
+import {IPhoto} from "@/interfaces/album.interface";
+import {GetServerSidePropsContext} from "next";
+import nookies from "nookies";
 
 
 interface IProps {
@@ -22,7 +26,7 @@ const PhotoUploaderCreate: React.FC<IProps> = ({
             {isDragActive ? (
                 <p>Перетащите файлы сюда...</p>
             ) : (
-                <div style={{height: 20, width: 160}}>
+                <div style={{height: 40, width: 160}}>
                     { children }
                 </div>
             )}

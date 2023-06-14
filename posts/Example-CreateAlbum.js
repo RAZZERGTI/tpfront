@@ -17,7 +17,7 @@ files.forEach(filePath => {
 	})
 })
 
-fetch('http://localhost:3001/createAlbum', {
+fetch('http://188.212.124.120:3001/createAlbum', {
 	method: 'POST',
 	body: formData,
 	headers: {
