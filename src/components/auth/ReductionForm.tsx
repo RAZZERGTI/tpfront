@@ -44,34 +44,35 @@ const ReductionForm = () => {
         }
     };
 
-    const onCodeSubmit = async (values: ReductionFormValues) => {
-        try {
-            const response = await Api.auth.checkCodeReduction(values);
-            if (response.response) {
-                setShowNewPasswords(true);
-                setShowCodeInput(false);
-                notification.success({
-                    message: "Код успешно введен!",
-                    description: "Переходим на главную страницу...",
-                    duration: 2,
-                });
-            } else {
-                notification.error({
-                    message: "Ошибка!",
-                    description: "Неверный код",
-                    duration: 2,
-                });
-            }
-        } catch (err) {
-            console.log("CodeForm", err);
+    const onCodeSubmit = async (values: ReductionFormWithCodeDTO) => {
+  try {
+    const response = await Api.auth.checkCodeReduction(values);
+    if (response.response) {
+      setShowNewPasswords(true);
+      setShowCodeInput(false);
+      notification.success({
+        message: "Код успешно введен!",
+        description: "Переходим на главную страницу...",
+        duration: 2,
+      });
+    } else {
+      notification.error({
+        message: "Ошибка!",
+        description: "Неверный код",
+        duration: 2,
+      });
+    }
+  } catch (err) {
+    console.log("CodeForm", err);
 
-            notification.error({
-                message: "Ошибка!",
-                description: "Неверный код",
-                duration: 2,
-            });
-        }
-    };
+    notification.error({
+      message: "Ошибка!",
+      description: "Неверный код",
+      duration: 2,
+    });
+  }
+};
+
 
     const onNewPasswordSubmit = async (values: ReductionFormValues) => {
         try {
