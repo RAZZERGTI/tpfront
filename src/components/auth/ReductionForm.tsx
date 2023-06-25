@@ -1,22 +1,25 @@
-import React, {useState} from 'react';
-import {Button, Form, Input, notification} from "antd";
-import styles from './Auth.module.scss'
+import React, { useState } from 'react';
+import { Button, Form, Input, notification } from "antd";
+import styles from './Auth.module.scss';
 import {
     ReductionDTO,
-    ReductionFormWithCodeDTO, ReductionFormWithPassDTO,
+    ReductionFormWithCodeDTO,
+    ReductionFormWithPassDTO,
     RegisterFormDTO,
     RegisterFormWithCodeDTO
 } from "@/pages/api/dto/auth.dto";
 import * as Api from "@/pages/api";
-import {setCookie} from "nookies";
-import { sha512Hash } from '@/hash/hashUtils'
-import {checkCodeReduction, newPassReduction, reduction} from "@/pages/api/auth";
+import { setCookie } from "nookies";
+import { sha512Hash } from '@/hash/hashUtils';
+import { checkCodeReduction, newPassReduction, reduction } from "@/pages/api/auth";
+
+type ReductionFormValues = ReductionDTO | ReductionFormWithCodeDTO | ReductionFormWithPassDTO;
 
 const ReductionForm = () => {
     const [showCodeInput, setShowCodeInput] = useState(false);
     const [showNewPasswords, setShowNewPasswords] = useState(false);
 
-    const onSubmit = async (values: ReductionDTO) => {
+    const onSubmit = async (values: ReductionFormValues) => {
         try {
             const response = await Api.auth.reduction(values);
             if ('error' in response) {
@@ -32,9 +35,7 @@ const ReductionForm = () => {
                     duration: 2,
                 });
             }
-
         } catch (err) {
-
             notification.error({
                 message: "Ошибка!",
                 description: "Неверная почта",
@@ -42,19 +43,19 @@ const ReductionForm = () => {
             });
         }
     };
-    const onCodeSubmit = async (values: ReductionFormWithCodeDTO) => {
+
+    const onCodeSubmit = async (values: ReductionFormValues) => {
         try {
-            const response  = await Api.auth.checkCodeReduction(values);
-            if (response.response){
-                setShowNewPasswords(true)
-                setShowCodeInput(false)
+            const response = await Api.auth.checkCodeReduction(values);
+            if (response.response) {
+                setShowNewPasswords(true);
+                setShowCodeInput(false);
                 notification.success({
                     message: "Код успешно введен!",
                     description: "Переходим на главную страницу...",
                     duration: 2,
                 });
-            }
-            else{
+            } else {
                 notification.error({
                     message: "Ошибка!",
                     description: "Неверный код",
@@ -71,12 +72,13 @@ const ReductionForm = () => {
             });
         }
     };
-    const onNewPasswordSubmit = async (values: ReductionFormWithPassDTO) => {
+
+    const onNewPasswordSubmit = async (values: ReductionFormValues) => {
         try {
-            values.password = sha512Hash(values.password)
-            const response  = await Api.auth.newPassReduction(values);
-            if (response){
-                console.log(response.response.id)
+            values.password = sha512Hash(values.password);
+            const response = await Api.auth.newPassReduction(values);
+            if (response) {
+                console.log(response.response.id);
                 location.href = "/dashboard";
                 notification.success({
                     message: "Пароль успешно введен!",
@@ -86,8 +88,7 @@ const ReductionForm = () => {
                 setCookie(null, "_id", `${response.response.id}`, {
                     path: "/",
                 });
-            }
-            else{
+            } else {
                 notification.error({
                     message: "Ошибка!",
                     description: "Неверный пароль",
@@ -104,6 +105,7 @@ const ReductionForm = () => {
             });
         }
     };
+
     return (
         <div className={styles.formBlock}>
             <Form
@@ -130,7 +132,7 @@ const ReductionForm = () => {
                     <Form.Item
                         label="Код"
                         name="code"
-                        rules={[{ required: true, message: "Укажите код"}]}
+                        rules={[{ required: true, message: "Укажите код" }]}
                     >
                         <Input />
                     </Form.Item>
@@ -139,7 +141,7 @@ const ReductionForm = () => {
                     <Form.Item
                         label="Пароль"
                         name="password"
-                        rules={[{ required: true, message: "Укажите пароль"}]}
+                        rules={[{ required: true, message: "Укажите пароль" }]}
                     >
                         <Input.Password />
                     </Form.Item>
