@@ -11,45 +11,43 @@ const LoginForm = () => {
     const [showCodeInput, setShowCodeInput] = useState(false);
 
     const onSubmit = async (values: LoginFormDTO) => {
-        try {
-            if (values.password && values.email === 'admin'){
-                setCookie(null, "_id", 'admin', {
+    try {
+        if (values.password && values.email === 'admin') {
+            setCookie(null, "_id", 'admin', {
+                path: "/",
+            });
+            location.href = "/admin/reports";
+        } else {
+            values.password = sha512Hash(values.password);
+            const response = await Api.auth.login(values);
+            if ('error' in response) {
+                notification.error({
+                    message: "Ошибка!",
+                    description: "Неверный логин или пароль",
+                    duration: 2,
+                });
+            } else {
+                setShowCodeInput(true);
+                notification.success({
+                    message: "Успешно!",
+                    description: "Остался последний шаг",
+                    duration: 2,
+                });
+                setCookie(null, "_id", response.response.id, {
                     path: "/",
                 });
-                location.href = "/admin/reports";
             }
-            else{
-                values.password = sha512Hash(values.password)
-                const response  = await Api.auth.login(values);
-                if (!response.error){
-                    setShowCodeInput(true);
-                    notification.success({
-                        message: "Успешно!",
-                        description: "Остался последний шаг",
-                        duration: 2,
-                    });
-                    setCookie(null, "_id", response.response.id, {
-                        path: "/",
-                    });
-                }
-                else{
-                    notification.error({
-                        message: "Ошибка!",
-                        description: "Неверный логин или пароль",
-                        duration: 2,
-                    });
-                }
-            }
-        } catch (err) {
-            console.log("LoginForm", err);
-
-            notification.error({
-                message: "Ошибка!",
-                description: "Неверный логин или пароль",
-                duration: 2,
-            });
         }
-    };
+    } catch (err) {
+        console.log("LoginForm", err);
+
+        notification.error({
+            message: "Ошибка!",
+            description: "Неверный логин или пароль",
+            duration: 2,
+        });
+    }
+};
     const onCodeSubmit = async (values: LoginFormWithCodeDTO) => {
         try {
             const response  = await Api.auth.checkCodeAuth(values);
