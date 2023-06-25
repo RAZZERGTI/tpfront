@@ -13,13 +13,12 @@ const RegisterForm: React.FC = () => {
     try {
       values.password = sha512Hash(values.password);
       const response = await Api.auth.register(values);
-      if (!response.error) {
-        setShowCodeInput(true);
-        notification.success({
-          message: 'Успешно!',
-          description: 'Остался последний шаг',
-          duration: 2,
-        });
+      if ('error' in response) {
+                notification.error({
+                    message: "Ошибка!",
+                    description: "Неверный логин или пароль",
+                    duration: 2,
+                });
         setCookie(null, '_id', `${response.response.id}`, {
           path: '/',
         });
