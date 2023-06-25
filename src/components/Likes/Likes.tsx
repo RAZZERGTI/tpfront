@@ -23,18 +23,26 @@ const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
         setLikesData(album)
     }
     const handleActiveLike = async (idPhoto: string) => {
-        let updatedLikes: ILikes[];
+  let updatedLikes: ILikes[];
 
-        if (likesData.some((photo) => photo.idPhoto === idPhoto)) {
-            updatedLikes = likesData.filter((photo) => photo.idPhoto !== idPhoto);
-            await Api.files.deleteLike(idPhoto);
-        } else {
-            updatedLikes = [...likesData, { idPhoto }];
-            await Api.files.setLike(idPhoto, idAlbum, _id);
-        }
-
-        setLikesData(updatedLikes);
+  if (likesData.some((photo) => photo.idPhoto === idPhoto)) {
+    updatedLikes = likesData.filter((photo) => photo.idPhoto !== idPhoto);
+    await Api.files.deleteLike(idPhoto);
+  } else {
+    const newLike: ILikes = {
+      idUser: '', // Add the appropriate value for idUser
+      idAlbum: '', // Add the appropriate value for idAlbum
+      timestamp: '', // Add the appropriate value for timestamp
+      idPhoto,
     };
+
+    updatedLikes = [...likesData, newLike];
+    await Api.files.setLike(idPhoto, idAlbum, _id);
+  }
+
+  setLikesData(updatedLikes);
+};
+
     useEffect(() => {
         getImages()
     }, [_id]);
