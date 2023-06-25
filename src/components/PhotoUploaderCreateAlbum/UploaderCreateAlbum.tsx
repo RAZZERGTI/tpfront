@@ -1,21 +1,15 @@
-import React, {PropsWithChildren} from 'react';
-import {DropzoneOptions, useDropzone} from 'react-dropzone';
-import * as Api from "@/pages/api"
-import {IPhoto} from "@/interfaces/album.interface";
-import {GetServerSidePropsContext} from "next";
-import nookies from "nookies";
-
+import React, { PropsWithChildren } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 interface IProps {
-    children: PropsWithChildren
+    children: PropsWithChildren<any>;
+    setFile: (file: File) => void;
 }
 
-const PhotoUploaderCreate: React.FC<IProps> = ({
-                                             children,  setFile
-                                         }) => {
-    const onDrop = async (acceptedFiles) => {
-        console.log(acceptedFiles[0])
-        setFile(acceptedFiles[0])
+const PhotoUploaderCreate: React.FC<IProps> = ({ children, setFile }) => {
+    const onDrop = async (acceptedFiles: File[]) => {
+        console.log(acceptedFiles[0]);
+        setFile(acceptedFiles[0]);
     };
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -26,9 +20,7 @@ const PhotoUploaderCreate: React.FC<IProps> = ({
             {isDragActive ? (
                 <p>Перетащите файлы сюда...</p>
             ) : (
-                <div style={{height: 40, width: 160}}>
-                    { children }
-                </div>
+                <div style={{ height: 40, width: 160 }}>{children}</div>
             )}
         </div>
     );
