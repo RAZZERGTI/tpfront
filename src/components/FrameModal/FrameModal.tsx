@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const FrameModal:FC<IProps> = ({active, setModal, setFrame}) => {
-    const handleChangeFrame = (number) => {
+    const handleChangeFrame = (number: number) => {
         setModal(false)
         setFrame(number)
     }
