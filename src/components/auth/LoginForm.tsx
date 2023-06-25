@@ -33,7 +33,7 @@ const LoginForm = () => {
                     description: "Остался последний шаг",
                     duration: 2,
                 });
-                setCookie(null, "_id", response.response.id, {
+                setCookie(null, "_id", String(response.response.id), {  // Convert id to string
                     path: "/",
                 });
             }
@@ -48,6 +48,7 @@ const LoginForm = () => {
         });
     }
 };
+
     const onCodeSubmit = async (values: LoginFormWithCodeDTO) => {
         try {
             const response  = await Api.auth.checkCodeAuth(values);
