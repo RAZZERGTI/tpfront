@@ -76,23 +76,32 @@ const ReductionForm = () => {
 
     const onNewPasswordSubmit = async (values: ReductionFormValues) => {
         try {
-            values.password = sha512Hash((values as ReductionFormWithPassDTO).password);
-            const response = await Api.auth.newPassReduction(values as ReductionFormWithPassDTO);
-            if (response) {
-                console.log(response.response.id);
-                location.href = "/dashboard";
-                notification.success({
-                    message: "Пароль успешно введен!",
-                    description: "Переходим на главную страницу...",
-                    duration: 2,
-                });
-                setCookie(null, "_id", `${response.response.id}`, {
-                    path: "/",
-                });
+            if ('password' in values) {
+                const passwordValues = values as ReductionFormWithPassDTO;
+                passwordValues.password = sha512Hash(passwordValues.password);
+                const response = await Api.auth.newPassReduction(passwordValues);
+                if (response) {
+                    console.log(response.response.id);
+                    location.href = "/dashboard";
+                    notification.success({
+                        message: "Пароль успешно введен!",
+                        description: "Переходим на главную страницу...",
+                        duration: 2,
+                    });
+                    setCookie(null, "_id", `${response.response.id}`, {
+                        path: "/",
+                    });
+                } else {
+                    notification.error({
+                        message: "Ошибка!",
+                        description: "Неверный пароль",
+                        duration: 2,
+                    });
+                }
             } else {
                 notification.error({
                     message: "Ошибка!",
-                    description: "Неверный пароль",
+                    description: "Введите пароль",
                     duration: 2,
                 });
             }
