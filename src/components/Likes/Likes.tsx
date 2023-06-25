@@ -6,7 +6,6 @@ import nookies from "nookies";
 import {ILikes} from "@/interfaces/album.interface";
 import {GetServerSidePropsContext} from "next";
 import * as Api from "@/pages/api";
-import Image from "next/image";
 
 interface LikesPageProps {
     _id: string;
@@ -14,7 +13,7 @@ interface LikesPageProps {
 
 const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
     const [likesData, setLikesData] = useState<ILikes[]>([])
-    
+
     console.log(likesData)
 
     const getImages = async () => {
@@ -23,25 +22,25 @@ const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
         setLikesData(album)
     }
     const handleActiveLike = async (idPhoto: string) => {
-  let updatedLikes: ILikes[];
+        let updatedLikes: ILikes[];
 
-  if (likesData.some((photo) => photo.idPhoto === idPhoto)) {
-    updatedLikes = likesData.filter((photo) => photo.idPhoto !== idPhoto);
-    await Api.files.deleteLike(idPhoto);
-  } else {
-    const newLike: ILikes = {
-      idUser: '', // Add the appropriate value for idUser
-      idAlbum: '', // Add the appropriate value for idAlbum
-      timestamp: '', // Add the appropriate value for timestamp
-      idPhoto,
+        if (likesData.some((photo) => photo.idPhoto === idPhoto)) {
+            updatedLikes = likesData.filter((photo) => photo.idPhoto !== idPhoto);
+            await Api.files.deleteLike(idPhoto);
+        } else {
+            const newLike: ILikes = {
+                idUser: '', // Add the appropriate value for idUser
+                idAlbum: '', // Add the appropriate value for idAlbum
+                timestamp: '', // Add the appropriate value for timestamp
+                idPhoto,
+            };
+
+            updatedLikes = [...likesData, newLike];
+            await Api.files.setLike(idPhoto, newLike.idAlbum, _id);
+        }
+
+        setLikesData(updatedLikes);
     };
-
-    updatedLikes = [...likesData, newLike];
-    await Api.files.setLike(idPhoto, idAlbum, _id);
-  }
-
-  setLikesData(updatedLikes);
-};
 
     useEffect(() => {
         getImages()
