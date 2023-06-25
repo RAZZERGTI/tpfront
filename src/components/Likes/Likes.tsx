@@ -8,9 +8,13 @@ import {GetServerSidePropsContext} from "next";
 import * as Api from "@/pages/api";
 import Image from "next/image";
 
-const LikesPage = (ctx: GetServerSidePropsContext) => {
-    const { _id } = nookies.get(ctx);
+interface LikesPageProps {
+    _id: string;
+}
+
+const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
     const [likesData, setLikesData] = useState<ILikes[]>([])
+    
     console.log(likesData)
 
     const getImages = async () => {
@@ -19,7 +23,7 @@ const LikesPage = (ctx: GetServerSidePropsContext) => {
         setLikesData(album)
     }
     const handleActiveLike = async (idPhoto: string) => {
-        let updatedLikes: string[];
+        let updatedLikes: ILikes[];
 
         if (likesData.some((photo) => photo.idPhoto === idPhoto)) {
             updatedLikes = likesData.filter((photo) => photo.idPhoto !== idPhoto);
@@ -72,6 +76,12 @@ const LikesPage = (ctx: GetServerSidePropsContext) => {
                 : <NonLikes /> }
         </div>
     );
+};
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    const { _id } = nookies.get(ctx);
+    return {
+        props: { _id },
+    };
 };
 
 export default LikesPage;
