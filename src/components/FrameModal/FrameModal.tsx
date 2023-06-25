@@ -15,8 +15,8 @@ const FrameModal:FC<IProps> = ({active, setModal, setFrame}) => {
         setFrame(number)
     }
     return (
-        <Modal active={active} setActive={setModal}>
-            <div className={styles.frame_wrapper}>
+        <Modal active={active} setActive={(value: boolean) => setModal(value)}>
+              <div className={styles.frame_wrapper}>
                 <h4>Выберите рамку</h4>
                 <div className={styles.frame_images}>
                     <Image src={`/frame/frame1.apng`}
