@@ -74,38 +74,38 @@ const ReductionForm = () => {
 };
 
 
-    const onNewPasswordSubmit = async (values: ReductionFormValues) => {
-        try {
-            values.password = sha512Hash(values.password);
-            const response = await Api.auth.newPassReduction(values);
-            if (response) {
-                console.log(response.response.id);
-                location.href = "/dashboard";
-                notification.success({
-                    message: "Пароль успешно введен!",
-                    description: "Переходим на главную страницу...",
-                    duration: 2,
-                });
-                setCookie(null, "_id", `${response.response.id}`, {
-                    path: "/",
-                });
-            } else {
-                notification.error({
-                    message: "Ошибка!",
-                    description: "Неверный пароль",
-                    duration: 2,
-                });
-            }
-        } catch (err) {
-            console.log("CodeForm", err);
+   const onNewPasswordSubmit = async (values: ReductionFormWithPassDTO) => {
+  try {
+    values.password = sha512Hash(values.password);
+    const response = await Api.auth.newPassReduction(values);
+    if (response) {
+      console.log(response.response.id);
+      location.href = "/dashboard";
+      notification.success({
+        message: "Пароль успешно введен!",
+        description: "Переходим на главную страницу...",
+        duration: 2,
+      });
+      setCookie(null, "_id", `${response.response.id}`, {
+        path: "/",
+      });
+    } else {
+      notification.error({
+        message: "Ошибка!",
+        description: "Неверный пароль",
+        duration: 2,
+      });
+    }
+  } catch (err) {
+    console.log("CodeForm", err);
 
-            notification.error({
-                message: "Ошибка!",
-                description: "Неверный пароль",
-                duration: 2,
-            });
-        }
-    };
+    notification.error({
+      message: "Ошибка!",
+      description: "Неверный пароль",
+      duration: 2,
+    });
+  }
+};
 
     return (
         <div className={styles.formBlock}>
