@@ -21,11 +21,9 @@ const Navigation: React.FC = () => {
       <div>
         {pathname === '/dashboard' && (
           <Tooltip title={'Справка'}>
-            {({ getTriggerProps }) => (
-              <button className={styles.help} onClick={() => setActive(true)} {...getTriggerProps()}>
-                <Image src="/help.svg" height={30} width={30} alt={'Help'} />
-              </button>
-            )}
+            <button className={styles.help} onClick={() => setActive(true)}>
+              <Image src="/help.svg" height={30} width={30} alt={'Help'} />
+            </button>
           </Tooltip>
         )}
       </div>
