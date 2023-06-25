@@ -3,8 +3,13 @@ import Image from "next/image";
 import Modal from "@/components/ui/ModalFrameWrapper/Modal";
 import styles from './FrameModal.module.scss'
 
+interface IProps {
+    active: boolean
+    setModal: (value: boolean) => void
+    setFrame: (value: number) => void
+}
 
-const FrameModal = ({active, setModal, setFrame}) => {
+const FrameModal:FC<IProps> = ({active, setModal, setFrame}) => {
     const handleChangeFrame = (number) => {
         setModal(false)
         setFrame(number)
