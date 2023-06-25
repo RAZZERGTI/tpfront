@@ -20,11 +20,12 @@ const Navigation: React.FC = () => {
       </div>
       <div>
         {pathname === '/dashboard' && (
-          <Tooltip title={'Справка'}>
-            <button className={styles.help} onClick={() => setActive(true)}>
-              <Image src="/help.svg" height={30} width={30} alt={'Help'} />
-            </button>
-          </Tooltip>
+          <Tooltip title={'Справка'} as any>
+  <button className={styles.help} onClick={() => setActive(true)}>
+    <Image src="/help.svg" height={30} width={30} alt={'Help'} />
+  </button>
+</Tooltip>
+
         )}
       </div>
     </div>
