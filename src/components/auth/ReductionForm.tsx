@@ -19,15 +19,13 @@ const ReductionForm = () => {
     const onSubmit = async (values: ReductionDTO) => {
         try {
             const response = await Api.auth.reduction(values);
-            if (!response.error){
-                setShowCodeInput(true);
-                notification.success({
-                    message: "Успешно!",
-                    description: "Остался последний шаг",
+            if ('error' in response) {
+                notification.error({
+                    message: "Ошибка!",
+                    description: "Неверный логин или пароль",
                     duration: 2,
                 });
-            }
-            else{
+            } else {
                 notification.error({
                     message: "Ошибка!",
                     description: "Неверная почта",
