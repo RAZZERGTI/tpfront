@@ -6,6 +6,8 @@ import nookies from "nookies";
 import {ILikes} from "@/interfaces/album.interface";
 import {GetServerSidePropsContext} from "next";
 import * as Api from "@/pages/api";
+import Image from 'next/image'
+
 
 interface LikesPageProps {
     _id: string;
