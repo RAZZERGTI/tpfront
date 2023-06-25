@@ -7,12 +7,17 @@ import * as Api from "@/pages/api";
 import Link from "next/link";
 import nookies from "nookies";
 
+interface User {
+  name: string;
+  mail: string;
+}
+
 export const Header: React.FC = () => {
   const router = useRouter();
   const selectedMenu = router.pathname;
   const { _id } = nookies.get();
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User>({ name: "", mail: "" });
 
   console.log(user);
 
