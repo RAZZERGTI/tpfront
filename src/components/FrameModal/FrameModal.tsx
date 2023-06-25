@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Image from "next/image";
 import Modal from "@/components/ui/ModalFrameWrapper/Modal";
 import styles from './FrameModal.module.scss'
