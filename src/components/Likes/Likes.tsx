@@ -6,16 +6,11 @@ import nookies from "nookies";
 import {ILikes} from "@/interfaces/album.interface";
 import {GetServerSidePropsContext} from "next";
 import * as Api from "@/pages/api";
-import Image from 'next/image'
+import Image from "next/image";
 
-
-interface LikesPageProps {
-    _id: string;
-}
-
-const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
+const LikesPage = (ctx: GetServerSidePropsContext) => {
+    const { _id } = nookies.get(ctx);
     const [likesData, setLikesData] = useState<ILikes[]>([])
-
     console.log(likesData)
 
     const getImages = async () => {
@@ -24,26 +19,18 @@ const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
         setLikesData(album)
     }
     const handleActiveLike = async (idPhoto: string) => {
-        let updatedLikes: ILikes[];
+        let updatedLikes: string[];
 
         if (likesData.some((photo) => photo.idPhoto === idPhoto)) {
             updatedLikes = likesData.filter((photo) => photo.idPhoto !== idPhoto);
             await Api.files.deleteLike(idPhoto);
         } else {
-            const newLike: ILikes = {
-                idUser: '', // Add the appropriate value for idUser
-                idAlbum: '', // Add the appropriate value for idAlbum
-                timestamp: '', // Add the appropriate value for timestamp
-                idPhoto,
-            };
-
-            updatedLikes = [...likesData, newLike];
-            await Api.files.setLike(idPhoto, newLike.idAlbum, _id);
+            updatedLikes = [...likesData, { idPhoto }];
+            await Api.files.setLike(idPhoto, idAlbum, _id);
         }
 
         setLikesData(updatedLikes);
     };
-
     useEffect(() => {
         getImages()
     }, [_id]);
@@ -85,12 +72,6 @@ const LikesPage: React.FC<LikesPageProps> = ({ _id }) => {
                 : <NonLikes /> }
         </div>
     );
-};
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    const { _id } = nookies.get(ctx);
-    return {
-        props: { _id },
-    };
 };
 
 export default LikesPage;
