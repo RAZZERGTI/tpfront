@@ -1,41 +1,42 @@
-import React, { useState } from 'react';
-import { Button, Form, Input, notification } from "antd";
-import styles from './Auth.module.scss';
+import React, {useState} from 'react';
+import {Button, Form, Input, notification} from "antd";
+import styles from './Auth.module.scss'
 import {
     ReductionDTO,
-    ReductionFormWithCodeDTO,
-    ReductionFormWithPassDTO,
+    ReductionFormWithCodeDTO, ReductionFormWithPassDTO,
     RegisterFormDTO,
     RegisterFormWithCodeDTO
 } from "@/pages/api/dto/auth.dto";
 import * as Api from "@/pages/api";
-import { setCookie } from "nookies";
-import { sha512Hash } from '@/hash/hashUtils';
-import { checkCodeReduction, newPassReduction, reduction } from "@/pages/api/auth";
-
-type ReductionFormValues = ReductionDTO | ReductionFormWithCodeDTO | ReductionFormWithPassDTO;
+import {setCookie} from "nookies";
+import { sha512Hash } from '@/hash/hashUtils'
+import {checkCodeReduction, newPassReduction, reduction} from "@/pages/api/auth";
 
 const ReductionForm = () => {
     const [showCodeInput, setShowCodeInput] = useState(false);
     const [showNewPasswords, setShowNewPasswords] = useState(false);
 
-    const onSubmit = async (values: ReductionFormValues) => {
+    const onSubmit = async (values: ReductionDTO) => {
         try {
             const response = await Api.auth.reduction(values);
-            if ('error' in response) {
-                notification.error({
-                    message: "Ошибка!",
-                    description: "Неверный логин или пароль",
+            if (!response.error){
+                setShowCodeInput(true);
+                notification.success({
+                    message: "Успешно!",
+                    description: "Остался последний шаг",
                     duration: 2,
                 });
-            } else {
+            }
+            else{
                 notification.error({
                     message: "Ошибка!",
                     description: "Неверная почта",
                     duration: 2,
                 });
             }
+
         } catch (err) {
+
             notification.error({
                 message: "Ошибка!",
                 description: "Неверная почта",
@@ -43,19 +44,19 @@ const ReductionForm = () => {
             });
         }
     };
-
-    const onCodeSubmit = async (values: ReductionFormValues) => {
+    const onCodeSubmit = async (values: ReductionFormWithCodeDTO) => {
         try {
-            const response = await Api.auth.checkCodeReduction(values as ReductionFormWithCodeDTO);
-            if (response.response) {
-                setShowNewPasswords(true);
-                setShowCodeInput(false);
+            const response  = await Api.auth.checkCodeReduction(values);
+            if (response.response){
+                setShowNewPasswords(true)
+                setShowCodeInput(false)
                 notification.success({
                     message: "Код успешно введен!",
                     description: "Переходим на главную страницу...",
                     duration: 2,
                 });
-            } else {
+            }
+            else{
                 notification.error({
                     message: "Ошибка!",
                     description: "Неверный код",
@@ -72,36 +73,26 @@ const ReductionForm = () => {
             });
         }
     };
-
-
-    const onNewPasswordSubmit = async (values: ReductionFormValues) => {
+    const onNewPasswordSubmit = async (values: ReductionFormWithPassDTO) => {
         try {
-            if ('password' in values) {
-                const passwordValues = values as ReductionFormWithPassDTO;
-                passwordValues.password = sha512Hash(passwordValues.password);
-                const response = await Api.auth.newPassReduction(passwordValues);
-                if (response) {
-                    console.log(response.response.id);
-                    location.href = "/dashboard";
-                    notification.success({
-                        message: "Пароль успешно введен!",
-                        description: "Переходим на главную страницу...",
-                        duration: 2,
-                    });
-                    setCookie(null, "_id", `${response.response.id}`, {
-                        path: "/",
-                    });
-                } else {
-                    notification.error({
-                        message: "Ошибка!",
-                        description: "Неверный пароль",
-                        duration: 2,
-                    });
-                }
-            } else {
+            values.password = sha512Hash(values.password)
+            const response  = await Api.auth.newPassReduction(values);
+            if (response){
+                console.log(response.response.id)
+                location.href = "/dashboard";
+                notification.success({
+                    message: "Пароль успешно введен!",
+                    description: "Переходим на главную страницу...",
+                    duration: 2,
+                });
+                setCookie(null, "_id", `${response.response.id}`, {
+                    path: "/",
+                });
+            }
+            else{
                 notification.error({
                     message: "Ошибка!",
-                    description: "Введите пароль",
+                    description: "Неверный пароль",
                     duration: 2,
                 });
             }
@@ -115,8 +106,6 @@ const ReductionForm = () => {
             });
         }
     };
-
-
     return (
         <div className={styles.formBlock}>
             <Form
@@ -143,7 +132,7 @@ const ReductionForm = () => {
                     <Form.Item
                         label="Код"
                         name="code"
-                        rules={[{ required: true, message: "Укажите код" }]}
+                        rules={[{ required: true, message: "Укажите код"}]}
                     >
                         <Input />
                     </Form.Item>
@@ -152,7 +141,7 @@ const ReductionForm = () => {
                     <Form.Item
                         label="Пароль"
                         name="password"
-                        rules={[{ required: true, message: "Укажите пароль" }]}
+                        rules={[{ required: true, message: "Укажите пароль"}]}
                     >
                         <Input.Password />
                     </Form.Item>
