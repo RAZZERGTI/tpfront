@@ -153,7 +153,7 @@ const ReductionForm = () => {
                     }}
                 >
                     <Button type="primary" htmlType="submit">
-                        {showCodeInput ? "Подтвердить" : "Получить код"}
+                        {showCodeInput || showNewPasswords ? "Подтвердить" : "Получить код"}
                     </Button>
                 </Form.Item>
             </Form>
