@@ -28,11 +28,15 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         return authProps;
     }
     const albums = await AlbumService.getAllAlbums(_id)
-
-    return{
-        props: {albums}
+    if (albums.length > 0){
+        console.log('hello')
+        return{
+            props: {albums}
+        }
     }
-
+    return {
+        props: { albums: [] },
+    };
 }
 
 export default DashboardPage;
