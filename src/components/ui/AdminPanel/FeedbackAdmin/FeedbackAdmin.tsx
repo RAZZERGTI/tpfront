@@ -4,6 +4,13 @@ import * as Api from "@/pages/api";
 import Image from 'next/image'
 const FeedbackAdmin = () => {
     const [report, setReport] = useState([])
+    const [expandedImage, setExpandedImage] = useState(null);
+    const expandImage = (image) => {
+        setExpandedImage(image);
+    };
+    const closeExpandedImage = () => {
+        setExpandedImage(null);
+    };
     const getAllReports = async () => {
         let info = await Api.files.getAllReport()
         setReport(info)
@@ -38,6 +45,21 @@ const FeedbackAdmin = () => {
     }
     return (
         <div>
+            {expandedImage && (
+                <div className={styles.overlay} onClick={closeExpandedImage}>
+                    <div className={styles.expanded_image_wrapper}>
+                        <img
+                            className={styles.expanded_image}
+                            src={`http://188.212.124.120:3001/api/download/${expandedImage}`}
+                            alt="Expanded Photo"
+                        />
+                        <button className={styles.close_button} onClick={closeExpandedImage}>
+                            Закрыть
+                        </button>
+                    </div>
+                </div>
+            )}
+
             {report.length > 0 ? (report.map((rep) =>(
             <table className={styles.table}>
                 <thead>
@@ -49,40 +71,43 @@ const FeedbackAdmin = () => {
                         <th>Действие</th>
                     </tr>
                 </thead>
-                     <tbody>
-                            <tr key={rep.idAlbum}>
-                                <td>{rep.idUser}</td>
-                                <td align="center">
-                                    <div className={styles.photo_wrapper}>
-                                        <Image className={styles.image}
-                                               fill={true} src={`http://188.212.124.120:3001/api/download/${rep.idPhoto}`}
-                                               alt={'Photo'}/>
-                                    </div>
-                                </td>
-                                <td>{ rep.idAlbum }</td>
-                                <td align="center">
-                                    {
-                                        handleReportText(rep.indexReport.split(",")).map(rep => (
-                                                <p>{rep}</p>
-                                            )
-                                        )
-                                    }
-                                </td>
-                                <td align="center">
-                                            <button className={styles.delete_btn}
-                                                    onClick={() => deletePhoto(rep.idAlbum, rep.idPhoto)}
-                                            >
-                                                <img width={30} height={30} src="/checked2.svg" alt="Delete"/>
-                                            </button>
-                                            <button className={styles.delete_btn}
-                                                    onClick={() => deleteReport(rep.idPhoto)}
-                                            >
-                                                <img width={30} height={30} src="/redImages/close.svg" alt="Delete"/>
-                                            </button>
-                                </td>
-                            </tr>
-                    </tbody>
-                    </table>
+                <tbody>
+                <tr key={rep.idAlbum}>
+                    <td>{rep.idUser}</td>
+                    <td align="center">
+                        <div className={styles.photo_wrapper}>
+                            <Image
+                                className={styles.image}
+                                fill={true}
+                                src={`http://188.212.124.120:3001/api/download/${rep.idPhoto}`}
+                                alt={'Photo'}
+                                onClick={() => expandImage(rep.idPhoto)} // Добавлен обработчик для увеличения изображения
+                            />
+                        </div>
+                    </td>
+                    <td>{rep.idAlbum}</td>
+                    <td align="center">
+                        {handleReportText(rep.indexReport.split(",")).map((rep) => (
+                            <p>{rep}</p>
+                        ))}
+                    </td>
+                    <td align="center">
+                        <button
+                            className={styles.delete_btn}
+                            onClick={() => deletePhoto(rep.idAlbum, rep.idPhoto)}
+                        >
+                            <img width={30} height={30} src="/checked2.svg" alt="Delete" />
+                        </button>
+                        <button
+                            className={styles.delete_btn}
+                            onClick={() => deleteReport(rep.idPhoto)}
+                        >
+                            <img width={30} height={30} src="/redImages/close.svg" alt="Delete" />
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
                     ))) :
                     <h2 className={styles.zero_vacancy}>Нет жалоб</h2>
                 }
